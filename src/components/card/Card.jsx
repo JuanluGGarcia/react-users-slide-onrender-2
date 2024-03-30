@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { USERS } from '../../constants/users';
-import Button from '../button/Button';
 
 const Card = () => {
 	const [user, setUser] = useState(0);
@@ -13,19 +12,35 @@ const Card = () => {
 				<p>Username: {USERS[user].username}</p>
 				<p>Email: {USERS[user].email}</p>
 			</div>
-			<Button action={() => buttonPrevious(user, setUser)}>Previous</Button>
-			<Button action={() => buttonNext(user, setUser)}>Next</Button>
+			{/* <Button action={() => buttonPrevious(user, setUser)}>Previous</Button>
+			<Button action={() => buttonNext(user, setUser)}>Next</Button> */}
+
+			{/* Tengo que hacerlo de esta manera porque no puedo controlar que botón pulso haciendolo
+			de la otra manera */}
+			<button
+				onClick={() => buttonPrevious(user, setUser)}
+				disabled={user <= 0}
+			>
+				Previous
+			</button>
+			<button
+				onClick={() => buttonNext(user, setUser)}
+				disabled={user === USERS.length - 1}
+			>
+				Next
+			</button>
 		</>
 	);
 };
 
 const buttonPrevious = (user, setUser) => {
-	if (user === 0) return
-    setUser(user - 1);
+	console.log();
+	if (user === 0) return;
+	setUser(user - 1);
 };
 
 const buttonNext = (user, setUser) => {
-    if (user === USERS.length -1) return
+	if (user === USERS.length - 1) return;
 	setUser(user + 1);
 };
 
